@@ -6,11 +6,13 @@ import java.util.List;
  * @author Leticia Sessa 2016370
  */
 
+
+
 public class Investor implements StockMarketHandler{
 
 	private String id;
 	private int budget;
-	
+
 	private int amountSpent;
 	private int ownShares;
 	private List<Company> investedCompanies = new ArrayList<>();

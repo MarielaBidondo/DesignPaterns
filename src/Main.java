@@ -6,7 +6,7 @@
 public class Main {
 
 	public static void main(String[] args) {   /* USEED PATTERNS */   /*  STATE DESIGN PATTERN*/   /* COMPOSITE*/  /*BUILDER*/
-
+//We initializate our simulator
 		Simulator simulator = new Simulator();
 		simulator.run();
 

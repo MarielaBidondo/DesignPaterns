@@ -5,6 +5,7 @@ import java.util.List;
  */
 
 public interface StockMarketHandler {
+	//Abstraction implemented OOP
 
 	 int updateInitial(List<?> list);
 

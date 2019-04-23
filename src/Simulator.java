@@ -8,6 +8,7 @@ import java.util.List;
  */
 
 public class Simulator {
+	
 	List<Company> companies = new ArrayList<>();
 	List<Investor> investors = new ArrayList<>();
 	List<Investor> creditNotEnoughInvestors = new ArrayList<>();
@@ -71,7 +72,7 @@ public class Simulator {
 						for (Company c : companies) {
 							if (c.getSoldShares() == 0) {
 								if (c.getShareValue() > 0) {
-									c.setShareValue(c.getShareValue() / 2); /*price reduce by half*/
+									c.setShareValue(c.getShareValue() / 50); /*price reduce by 2% (*0.02 = /50 writenn like that to avoid to work with doub)*/
 								}
 
 							}

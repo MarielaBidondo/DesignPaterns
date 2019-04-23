@@ -7,7 +7,6 @@ import java.util.List;
  */
 
 
-
 public class Investor implements StockMarketHandler{
 
 	private String id;
@@ -81,7 +80,7 @@ public class Investor implements StockMarketHandler{
 		}
 
 		public Investor build(){
-			return new Investor(id,budget);
+			return new Investor(id, budget);
 		}
 	}
 

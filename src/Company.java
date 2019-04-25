@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -6,7 +8,7 @@ import java.util.List;
  */
 
 
-public class Company implements StockMarketHandler {
+public class Company implements Observable{
 
 	private String id;
 	private int shares;
@@ -14,13 +16,15 @@ public class Company implements StockMarketHandler {
 
 	private int soldShares;
 	private int capital;
-
+	
+	private List<StockMarketHandler> observers = new ArrayList<>();
+	//Company constructor
 	private Company(String id,int shares,int shareValue){
 		this.id = id;
 		this.shares = shares;
 		this.shareValue = shareValue;
 	}
-
+    //Getters and Setters
 	public String getId() {
 		return id;
 	}
@@ -84,28 +88,71 @@ public class Company implements StockMarketHandler {
 			this.shareValue = shareValue;
 			return this;
 		}
-
+       //public builder
 		public Company build(){
 			return new Company(id,shares,shareValue);
 		}
 	}
 
-	@Override
-	public int updateInitial(List<?> list) {
-		List<Company> companies = (List<Company>) list;
-		int initialShares = companies.stream().mapToInt(value -> value.getShares()).sum();
-		return initialShares;
-	}
-
-	@Override
+	
+	 // @Override 
+	  public int updateInitial(List<?> list) { List<Company> companies =
+	  (List<Company>) list; int initialShares = companies.stream().mapToInt(value
+	  -> value.getShares()).sum(); 
+	  this.notifyObservers(); 
+	  return initialShares;
+	  }
+	 
+//	@Override
 	public int updateCurrent(List<?> list) {
 		List<Company> companies = (List<Company>) list;
 		int soldShares = companies.stream().mapToInt(value -> value.getSoldShares()).sum();
-		return soldShares;
+		this.notifyObservers();
+		return soldShares;	
 	}
-
-	@Override
+//
+//	@Override
 	public void elementDetails(Object obj) {
 		System.out.println("Company ID:"+id+"  "+"Shares"+shares);
 	}
+//
+//	public void registerObserver(StockMarketHandler observer) {
+//		if(observer != null){
+//			this.observers.add(observer);
+//		}
+//	}
+	@Override
+	public void removeObserver(StockMarketHandler observer) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void notifyObservers() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void registerObserver(StockMarketHandler observer) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+//	@Override
+//	public void notifyObservers() {
+//		Iterator<StockMarketHandler> it = observers.iterator();
+//		while(it.hasNext()){
+//			StockMarketHandler observer = it.next();
+//			observer.update(this);
+//		}
+//	}
+//
+//	@Override
+//	public void removeObserver(StockMarketHandler observer) {
+//		if(observer != null){
+//			this.observers.remove(observer);
+//		}
+//	}
+	
 }

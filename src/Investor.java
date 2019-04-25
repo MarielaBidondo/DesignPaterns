@@ -7,14 +7,15 @@ import java.util.List;
  */
 
 
-public class Investor implements StockMarketHandler{
+public class Investor implements Observable{
 
 	private String id;
 	private int budget;
-
 	private int amountSpent;
 	private int ownShares;
 	private List<Company> investedCompanies = new ArrayList<>();
+	
+	private List<StockMarketHandler> observers = new ArrayList<>();
 
 	private Investor(String id,int budget){
 		this.id = id;
@@ -84,23 +85,43 @@ public class Investor implements StockMarketHandler{
 		}
 	}
 
-	@Override
+//	@Override
 	public int updateInitial(List<?> list) {
-		//List<Investor> investors = (List<Investor>) list;
-		//int allInvestorBudget = investors.stream().mapToInt(value -> value.getBudget()).sum();
+		List<Investor> investors = (List<Investor>) list;
+			int allInvestorBudget = investors.stream().mapToInt(value -> value.getBudget()).sum();
 		return 1;
 	}
-
-	@Override
+//
+//	@Override
 	public int updateCurrent(List<?> list) {
 		List<Investor> investors = (List<Investor>) list;
 		int currentInvestorsBudget = investors.stream().mapToInt(investor -> investor.getBudget()).sum();
 		return currentInvestorsBudget;
 	}
-
-	@Override
+//
+//	@Override
 	public void elementDetails(Object obj) {
 		System.out.println("Investor ID:"+id+"  "+"Budget:"+budget);
+ }
+
+	@Override
+	public void registerObserver(StockMarketHandler observer) {
+		// TODO Auto-generated method stub
+		
 	}
+
+	@Override
+	public void removeObserver(StockMarketHandler observer) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void notifyObservers() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 }

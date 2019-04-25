@@ -5,8 +5,12 @@
 
 public interface Observable {
 	
-	public void registerObserver(TradingAlertState observer);
+	 //methods to register and unregister observers
+	public void registerObserver(StockMarketHandler observer);
+	public void removeObserver(StockMarketHandler observer);
+	 //method to notify observers of change
 	public void notifyObservers();
-	public void removeObserver(TradingAlertState observer);
 	
+	   //method to get updates from subject
+    //public Object getUpdate();
 }

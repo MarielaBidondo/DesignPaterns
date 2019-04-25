@@ -9,6 +9,5 @@ public class Main {
 //We initializate our simulator
 		Simulator simulator = new Simulator();
 		simulator.run();
-
 	}
 }

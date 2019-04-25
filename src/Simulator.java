@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -7,11 +8,16 @@ import java.util.List;
  * @author Leticia Sessa 2016370
  */
 
+
+//https://stackoverflow.com/questions/13101556/investment-code-in-java
+//https://github.com/java9s/observer-pattern-example/blob/master/src/com/java9s/tutorials/designpattern/observer/Stock.java
+
 public class Simulator {
 	
-	List<Company> companies = new ArrayList<>();
-	List<Investor> investors = new ArrayList<>();
-	List<Investor> creditNotEnoughInvestors = new ArrayList<>();
+	private List<Company> companies = new ArrayList<>();
+	private List<Investor> investors = new ArrayList<>();
+	private List<Investor> creditNotEnoughInvestors = new ArrayList<>();
+	
 	StockMarket market = new StockMarket();  /*Creating a stock market object to implement composite design pattern usages*/
 	TradingAlertContext tradingState = new TradingAlertContext(); /*Contect object is created to check the usage of state design pattern*/
 
@@ -67,12 +73,13 @@ public class Simulator {
 					}
 
 					soldShare = comp.updateCurrent(companies);  /*updating the global sold share count*/
+					
 
 					if (soldShare == 10) { /*reducing share price by half if that company shares nothing*/
 						for (Company c : companies) {
 							if (c.getSoldShares() == 0) {
 								if (c.getShareValue() > 0) {
-									c.setShareValue(c.getShareValue() / 50); /*price reduce by 2% (*0.02 = /50 writenn like that to avoid to work with doub)*/
+									c.setShareValue(c.getShareValue() /2); /*price reduce by 2% (*0.02 = /50 writenn like that to avoid to work with doub)*/
 								}
 
 							}
@@ -234,5 +241,6 @@ public class Simulator {
 
 
 	}
+
 
 }

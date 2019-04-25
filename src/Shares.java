@@ -11,7 +11,6 @@ public class Shares {
 }
 
 
-=
 public abstract class Stock implements Observable{
 	private List<Observer> observers;
 	

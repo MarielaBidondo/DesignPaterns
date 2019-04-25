@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Mariela Bidondo 2016252
@@ -6,7 +8,9 @@
 
 
 public class TradingAlertContext {
+	
 	private TradingAlertState currentAlertState;
+	
 
 	public TradingAlertContext(){
 		currentAlertState = new Initialization();
@@ -19,4 +23,6 @@ public class TradingAlertContext {
 	public void status(){
 		currentAlertState.tradingStatus(this);
 	}
+	
+	
 }

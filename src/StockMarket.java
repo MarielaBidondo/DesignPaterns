@@ -8,13 +8,15 @@ import java.util.List;
  * @author Leticia Sessa 2016370
  */
 
-
-public class StockMarket implements StockMarketHandler{
+public class StockMarket implements StockMarketHandler {
+	//implements observer
+	
 	private List<Company> companies = new ArrayList<>();
 	private List<Investor> investors = new ArrayList<>();
 
 	@Override
 	public int updateInitial(List<?> list) {
+		System.out.println("ji");
 		return 0;
 	}
 
@@ -23,12 +25,11 @@ public class StockMarket implements StockMarketHandler{
 		return 0;
 	}
 
-
 	/*we can call this element details method at any time to get the updated list of investors and companies*/
 	@Override
 	public void elementDetails(Object obj) {
 
-		if(obj.getClass().equals(Company.class)){       /* Composite Design pattern is using to print all details of Companies  */
+		if(obj.getClass().equals(Company.class)){       /* Composite Design pattern is using to print all details of Companies (no sure  why is no observer)??? */
 			for(Company c:companies){		   		   /* at a particular time */
 				c.elementDetails(obj);
 			}
@@ -57,4 +58,8 @@ public class StockMarket implements StockMarketHandler{
 		}
 		return investors;
 	}
+
+
+
+	
 }

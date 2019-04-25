@@ -5,5 +5,5 @@
 
 public interface TradingAlertState {
 
-	void tradingStatus(TradingAlertContext ctx);
+	public void tradingStatus(TradingAlertContext ctx);
 }

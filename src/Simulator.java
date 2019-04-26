@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -21,9 +20,10 @@ public class Simulator {
 	StockMarket market = new StockMarket();  /*Creating a stock market object to implement composite design pattern usages*/
 	TradingAlertContext tradingState = new TradingAlertContext(); /*Contect object is created to check the usage of state design pattern*/
 
-	Investor inv = new Investor.InvestorBuilder().setId("TEST").setBudjet(100).build();  /*Creating Investor object*/
+	Investor inv = new Investor.InvestorBuilder().setId("TEST").setBudjet(10).build();  /*Creating Investor object*/
 	Company comp = new Company.CompanyBuilder().setId("TEST").setShares(100).setShareValue(10).build();  /*Creating Company object*/
 
+	
 	public void run(){
 		//System.out.println("Initiating -------------------------------------------------------------------------------");
 		tradingState.status(); /*Usage of the state design pattern*/
@@ -75,11 +75,11 @@ public class Simulator {
 					soldShare = comp.updateCurrent(companies);  /*updating the global sold share count*/
 					
 
-					if (soldShare == 10) { /*reducing share price by half if that company shares nothing*/
+					if (soldShare == 10) { /*reducing share price by 2% if that company shares nothing*/
 						for (Company c : companies) {
 							if (c.getSoldShares() == 0) {
 								if (c.getShareValue() > 0) {
-									c.setShareValue(c.getShareValue() /2); /*price reduce by 2% (*0.02 = /50 writenn like that to avoid to work with doub)*/
+									c.setShareValue(c.getShareValue() /50); /*price reduce by 2% (*0.02 = /50 written like that to avoid to work with doub)*/
 								}
 
 							}
@@ -114,7 +114,9 @@ public class Simulator {
 
 		System.out.println("-------------------------------------------------------------------------------------------\n\n");
 		Company highestCapitalCompany = companies.get(0);
+		
 		List<Company> highestCapitalCompanies = new ArrayList<>();
+		
 		for (Company c : companies) {
 			c.setCapital(c.getShares() * c.getShareValue());
 			if (c.getCapital() > highestCapitalCompany.getCapital()) {

@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 /**
  * @author Mariela Bidondo 2016252
@@ -9,12 +8,17 @@ import java.util.List;
 public interface StockMarketHandler {
 	//interface Observer
 	//public void update
-	//method to update the observer, used by subject
+	   //method to update the observer, used by subject
 	 int updateInitial(List<?> list);
 
 	 int updateCurrent(List<?> list);
 	 
-	//attach with subject to observer
-	 public void elementDetails(Object obj);
+	 void update(Investor investor);
+
+	 void update(Company company);
+	//attach with subject to observe
+	 public void elementDetails(Observable obser);
+	 
+	
  
 }

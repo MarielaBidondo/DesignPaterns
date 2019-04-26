@@ -16,7 +16,6 @@ public class StockMarket implements StockMarketHandler {
 
 	@Override
 	public int updateInitial(List<?> list) {
-		System.out.println("ji");
 		return 0;
 	}
 
@@ -27,17 +26,28 @@ public class StockMarket implements StockMarketHandler {
 
 	/*we can call this element details method at any time to get the updated list of investors and companies*/
 	@Override
-	public void elementDetails(Object obj) {
+	public void elementDetails(Observable observ) {
 
-		if(obj.getClass().equals(Company.class)){       /* Composite Design pattern is using to print all details of Companies (no sure  why is no observer)??? */
+		if(observ.getClass().equals(Company.class)){       /* Composite Design pattern is using to print all details of Companies (no sure  why is no observer)??? */
 			for(Company c:companies){		   		   /* at a particular time */
-				c.elementDetails(obj);
+				c.elementDetails(observ);
 			}
-		}else if(obj.getClass().equals(Investor.class)){    /* Composite Design pattern is using to print all details of Investors  */
+		}else if(observ.getClass().equals(Investor.class)){    /* Composite Design pattern is using to print all details of Investors  */
 			for(Investor i:investors){					   /* at a particular time */
-				i.elementDetails(obj);
+				i.elementDetails(observ);
 			}
 		}
+	}
+	
+	@Override
+	public void update(Investor investor) {
+		System.out.println("DISPLAYBOARD - The Price of "+investor.getId()+" has changed:"+investor.getOwnShares());	
+	}
+
+	@Override
+	public void update(Company companies) {
+		System.out.println("DISPLAYBOARD - The Price of "+ companies.getId()+" has changed:"+ companies.getShareValue());
+		
 	}
 
 	public List<Company> addCompanies(){
@@ -59,7 +69,4 @@ public class StockMarket implements StockMarketHandler {
 		return investors;
 	}
 
-
-
-	
 }

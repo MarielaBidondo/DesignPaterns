@@ -1,11 +1,11 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * @author Mariela Bidondo 2016252
  * @author Leticia Sessa 2016370
  */
-
 
 public class Investor implements Observable{
 
@@ -17,9 +17,10 @@ public class Investor implements Observable{
 	
 	private List<StockMarketHandler> observers = new ArrayList<>();
 
-	private Investor(String id,int budget){
+	private Investor(String id, int budget){
 		this.id = id;
 		this.budget = budget;
+		observers = new ArrayList<StockMarketHandler>();
 	}
 
 	public void addInvestedCompany(Company c){
@@ -93,35 +94,43 @@ public class Investor implements Observable{
 	}
 //
 //	@Override
-	public int updateCurrent(List<?> list) {
+		public int updateCurrent(List<?> list) {
 		List<Investor> investors = (List<Investor>) list;
 		int currentInvestorsBudget = investors.stream().mapToInt(investor -> investor.getBudget()).sum();
 		return currentInvestorsBudget;
 	}
 //
 //	@Override
-	public void elementDetails(Object obj) {
-		System.out.println("Investor ID:"+id+"  "+"Budget:"+budget);
+	public void elementDetails(Observable obser) {
+		System.out.println("Investor ID:" + id +"  "+"Budget:"+ budget);
  }
 
 	@Override
-	public void registerObserver(StockMarketHandler observer) {
-		// TODO Auto-generated method stub
-		
+	public void registerObserver(StockMarketHandler obser) {
+	
+		if(obser == null) {
+			
+			throw new NullPointerException("Null Observer");
+		}
+
+		if(!observers.contains(obser)) {
+			observers.add(obser);
+		}
 	}
 
 	@Override
-	public void removeObserver(StockMarketHandler observer) {
-		// TODO Auto-generated method stub
+	public void removeObserver(StockMarketHandler obser) {
+		if(obser != null){
+			this.observers.remove(obser);
+		}
 		
 	}
 
-	@Override
 	public void notifyObservers() {
-		// TODO Auto-generated method stub
-		
+		Iterator<StockMarketHandler> it = observers.iterator();
+		while(it.hasNext()){
+			StockMarketHandler observer = it.next();
+			observer.update(this);
+		}
 	}
-
-
-
 }
